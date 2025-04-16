@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+ </head>
+ <style>
+    *{
+    margin: 0;
+    padding: 0;
+
+  }
+  html,body{
+    place-items: center;
+   
+  }
+   
+  #dayIntro
+{
+    font-size: 40px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    border: 7px solid rgb(17,129,134);
+    border-radius: 10px;
+    margin: 1rem;
+height: 5vh;
+    padding: 15px;
+    background: linear-gradient(180deg, #a8b9d3,rgb(173, 227, 229));
+}
+ 
+  
+   .dispClock{
+    height: 15vh;
+    width: 535px;
+    /* background: linear-gradient(147deg, #000000 0%, #2c3e50 74%); */
+    border-radius: 6px;
+    text-align: center;
+  }
+   #time{
+    
+    color: #fff;
+    font-size: 70px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    font-family: 'Orbitron', sans-serif;
+    background: linear-gradient(135deg, #14ffe9, #48473c, #ff00e0);
+  
+  }
+ </style>
+ <body>
+
+    <!--Display day information e.g Wednesday March 12,2021-->
+    <div id="dayIntro">
+        <p id="dayName"></p>
+    </div>
+    
+        <!-- Display time -->
+        <div class="dispClock">
+            <div id="time"></div>
+        </div>
+    
+    <script>
+      setInterval(currentTime, 1000);
+
+function currentTime()
+{
+    let time = new Date();   // creating object of Date class  day and date
+    let dayName=time.getDay();        // SUN
+    let month=time.getMonth();
+    let year=time.getFullYear();
+    let date=time.getDate();
+    let hour = time.getHours();
+    let min = time.getMinutes();
+    let sec = time.getSeconds();
+    
+    if(hour==12){
+    am_pm = "PM";
+    }
+    else if (hour > 12) {
+    hour =hour - 12;
+      am_pm = "PM";
+    }
+     else if (hour == 0) {
+    hour = 12;
+      am_pm = "AM";
+    }
+    else{
+      am_pm="AM"
+    }
+
+    hour =hour< 10 ? "0"+ hour :hour;
+    min = min < 10 ? "0" + min : min;
+    sec = sec < 10 ? "0" + sec : sec;
+
+   //value of current time
+     let currentTime = hour+":" + min + ":" + sec +" "+ am_pm;
+
+  // value of present day(Day, Month, Year)
+  var months=["January","February","March","April","May","June","July","August","September","October","November","December"];
+  var week=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+
+  var presentDay=week[dayName]+","+months[month]+" "+date+", "+year;
+
+  const clock = document.getElementById("time");
+  const dayIntro=document.getElementById("dayName");
+
+  clock.innerHTML = currentTime;
+  dayIntro.innerHTML = presentDay;
+}
+
+currentTime();  //calling currentTime() function to initiate the process 
+
+    </script>
+ </body>
+ </html>
